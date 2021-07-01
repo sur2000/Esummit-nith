@@ -1,0 +1,69 @@
+.get{ 
+    background-image: url("http://www.kajipuriaresorts.com/wp-content/uploads/2018/03/banner-background.jpg");
+    background-size: cover; 
+    background-color: #cccccc;
+    padding: 3em 0 2em 0;
+    width: 100%;
+    .in{
+        width: 70%;
+        margin: 0 auto;
+        @media(max-width: 600px){
+           width: 100%;
+        }
+        h1{
+            text-align: center;
+            font-size: 2.5em;
+            @media(max-width: 600px){
+                font-size: 2.2em;
+            }
+        }
+        h3{
+            margin: 1.5em auto;
+            text-align: center;
+            font-size: 17px;
+            @media(max-width: 600px){
+                font-size: .7em;
+            }
+        }
+    }
+}
+
+.form_get{
+    display: grid;
+    grid-template-columns: auto auto;
+    @media(max-width: 600px){
+        grid-template-columns: auto;
+    }
+    input{
+        padding: .6em 1em;
+        margin: .8em 1em;
+        width: 23em;
+        @media(max-width: 600px){
+            width: 15em;
+            padding: .5em 1em;
+        }
+    }
+}
+.t_area{
+    grid-row: 1/4;
+    grid-column: 2/3;
+    margin: .8em 1em;
+    width: 25em;
+    padding: 0.5em 1em;
+    @media(max-width: 600px){
+        grid-column: 1/2;
+        grid-row: 4/5;
+        width: 15em;
+        height: 6em;
+    }
+}
+.btn4{
+    width: 50%; 
+    margin: 1.5em 25%!important;
+    padding: .70em!important;
+    background-color: black;
+    color: rgb(15, 15, 15)!important;
+    background-color: rgb(194, 126, 250)!important;
+    font-size: 16px!important;
+    font-weight: bold!important;
+}
