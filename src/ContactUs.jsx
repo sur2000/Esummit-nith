@@ -4,19 +4,8 @@ import { Button2 } from "./Button";
 import style from "./ContactUs.module.scss";
 import Joi from "joi-browser";
 
-export const ContactUs = (props) => {
-  const [isverfied, verified] = useState(false);
-  const verifyCallback = (response) => {
-    if (response) {
-      verified(true);
-    }
-  };
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-  });
+export default function GWS() {
+ 
 
   const [formerrors, setFormErrors] = useState({});
   const [submited, setSubmited] = useState(false);
@@ -27,15 +16,7 @@ export const ContactUs = (props) => {
     subject: Joi.string().trim().required().min(5).label("Subject"),
     message: Joi.string().trim().required().min(8).label("Message"),
   };
-  const validate = () => {
-    const result = Joi.validate(formData, schema, { abortEarly: false });
-    if (!result.error) return null;
-    const errors = {};
-    for (let item of result.error.details) {
-      errors[item.path[0]] = item.message;
-    }
-    return errors;
-  };
+ 
   const validateProperty = (input) => {
     const { name, value } = input;
     const obj = { [name]: value };
@@ -43,25 +24,7 @@ export const ContactUs = (props) => {
     const result = Joi.validate(obj, obj_schema);
     return result.error ? result.error.details[0].message : null;
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const errors = validate();
-    Object.keys(formData).map((key) => {
-      if (formData[key] === "" || formData[key] === null) {
-        errors[key] = `${key} is required`;
-      }
-      return 0;
-    });
-    if (errors !== 0) {
-      setFormErrors(errors);
-    }
-    if (errors) {
-      setSubmited(false);
-    } else {
-      setSubmited(true);
-      setFormData("");
-    }
-  };
+
   const handleChange = (e) => {
     const { currentTarget: input } = e;
     const errors = { ...formerrors };
@@ -73,7 +36,25 @@ export const ContactUs = (props) => {
     data[input.name] = input.value;
     setFormData({ ...data, [input.name]: input.value });
     setFormErrors(errors);
-  };
+  } 
+  
+  const [status,setStatus] = useState({})
+  const contactUs = ()=>{
+      return(
+          fetch('/api/contactUs',{
+              method:'POST',
+              body: JSON.stringify(contactUs),
+              headers: {
+                  'Content-Type': 'application/json'
+                },
+          }).then(res=>res.json()).then(res=>{
+              setStatus(res)
+          }).catch(err => {
+              console.log(err);
+          })
+      )
+  }
+  
   return (
     <div
       className={
@@ -119,7 +100,7 @@ export const ContactUs = (props) => {
                   Get In Touch
                 </h1>
                 <div className={style["inside-contact"]}>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={(e)=>{e.preventDefault();contactUs()}}>
                     <div
                       className={
                        
